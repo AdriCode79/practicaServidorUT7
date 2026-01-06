@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+  <%- include("../../partials/head") %>
+  <body>
+    <%- include("../../partials/header") %>
+
+    <main class="container">
+      <%- include("../../partials/flash") %>
+
+      <article class="product-detail">
+        <img src="<%= product.imageUrl %>" alt="<%= product.title %>" />
+
+        <div class="product-info">
+          <h1><%= product.title %></h1>
+          <p class="price">Precio: <%= product.price %> €</p>
+          <p class="category">Categoría: <%= product.category %></p>
+          <p class="condition">Estado: <%= product.condition %></p>
+          <p><strong>Descripción: </strong> <%= product.description %></p>
+
+          <div class="actions">
+            <% if (session.user && session.user.id === product.ownerId) { %>
+            <a
+              href="/products/<%= product.id %>/edit"
+              class="btn btn-secondary"
+            >
+              Editar
+            </a>
+
+            <form
+              action="/products/<%= product.id %>/delete"
+              method="POST"
+              class="inline-form"
+            >
+              <button type="submit" class="btn btn-danger">Eliminar</button>
+            </form>
+
+            <% } %>
+          </div>
+        </div>
+      </article>
+    </main>
+
+    <%- include("../../partials/footer") %>
+    <script src="/js/main.js"></script>
+  </body>
+</html>

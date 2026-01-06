@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+  <%- include("../../partials/head") %>
+
+  <body>
+    <%- include("../../partials/header") %>
+
+    <main class="profile-container">
+      <section class="profile-card">
+        <img
+          src="<%= user.avatarUrl || '/images/default-avatar.png' %>"
+          alt="Avatar"
+          class="profile-avatar"
+        />
+
+        <h2><%= user.username %></h2>
+        <p class="email"><%= user.email %></p>
+
+        <a href="/users/edit" class="btn-edit">Editar perfil</a>
+      </section>
+
+      <section class="products-section">
+        <h3>Mis productos publicados</h3>
+
+        <% if (products.length === 0) { %>
+          <p class="no-products">Todavía no has publicado ningún producto.</p>
+        <% } else { %>
+          <div class="product-grid">
+            <% products.forEach(product => { %>
+              <article class="product-card">
+                <img src="<%= product.imageUrl %>" alt="<%= product.title %>" />
+                <h4><%= product.title %></h4>
+                <p class="price"><%= product.price %> €</p>
+                <a href="/products/<%= product.id %>" class="btn-view">Ver producto</a>
+              </article>
+            <% }) %>
+          </div>
+        <% } %>
+      </section>
+    </main>
+
+    <%- include("../../partials/footer") %>
+  </body>
+</html>

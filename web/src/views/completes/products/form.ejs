@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+  <%- include("../../partials/head") %>
+  <body>
+    <%- include("../../partials/header") %>
+
+    <main class="container">
+      <%- include("../../partials/flash") %>
+
+      <h1><%= product && product.id ? "Editar producto" : "Subir producto" %></h1>
+
+      <form action="<%= formAction %>" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="title">Título</label>
+          <input
+            type="text"
+            id="title"
+            name="title"
+            value="<%= product ? product.title : '' %>"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="description">Descripción</label>
+          <textarea
+            id="description"
+            name="description"
+            required
+          ><%= product ? product.description : '' %></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="price">Precio (€)</label>
+          <input
+            type="number"
+            step="0.01"
+            id="price"
+            name="price"
+            value="<%= product ? product.price : '' %>"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+           <label for="category">Categoría</label>
+           <select name="category" id="category" required>
+              <option value="">-- Selecciona una categoría --</option>
+              <option value="ordenadores" <%= product?.category === "ordenadores" ? "selected" : "" %>>Ordenadores</option>
+              <option value="smartphones" <%= product?.category === "smartphones" ? "selected" : "" %>>Smartphones</option>
+              <option value="tablets" <%= product?.category === "tablets" ? "selected" : "" %>>Tablets</option>
+              <option value="accesorios" <%= product?.category === "accesorios" ? "selected" : "" %>>Accesorios</option>
+              <option value="audio" <%= product?.category === "audio" ? "selected" : "" %>>Audio</option>
+              <option value="gaming" <%= product?.category === "gaming" ? "selected" : "" %>>Gaming</option>
+              <option value="hogar" <%= product?.category === "hogar" ? "selected" : "" %>>Tecnología para el hogar</option>
+              <option value="otros" <%= product?.category === "otros" ? "selected" : "" %>>Otros</option>
+          </select>
+        </div>
+
+
+        <div class="form-group">
+          <label for="condition">Estado</label>
+          <select id="condition" name="condition">
+            <option value="nuevo" <%= product && product.condition === "nuevo" ? "selected" : "" %>>Nuevo</option>
+            <option value="como_nuevo" <%= product && product.condition === "como_nuevo" ? "selected" : "" %>>Como nuevo</option>
+            <option value="bueno" <%= !product || product.condition === "bueno" ? "selected" : "" %>>Bueno</option>
+            <option value="aceptable" <%= product && product.condition === "aceptable" ? "selected" : "" %>>Aceptable</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="image">Imagen del producto</label>
+            <input type="file" name="image" id="image" accept="image/*" />
+        </div>
+
+
+        <button type="submit" class="btn">
+          <%= product && product.id ? "Guardar cambios" : "Publicar producto" %>
+        </button>
+      </form>
+    </main>
+
+    <%- include("../../partials/footer") %>
+    <script src="/js/main.js"></script>
+  </body>
+</html>

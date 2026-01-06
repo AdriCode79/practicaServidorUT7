@@ -1,0 +1,16 @@
+<div class="product-card">
+  <img src="<%= product.imageUrl %>" alt="<%= product.title %>" />
+
+  <h2><%= product.title %></h2>
+  <p class="price"><%= product.price %> €</p>
+
+  <a href="/products/<%= product.id %>" class="btn btn-secondary">Ver</a>
+
+  <% if (session.user && session.user.id === product.ownerId) { %>
+    <a href="/products/<%= product.id %>/edit" class="btn btn-secondary">Editar</a>
+
+    <form action="/products/<%= product.id %>/delete" method="POST" class="inline-form">
+      <button type="submit" class="btn btn-danger">Eliminar</button>
+    </form>
+  <% } %>
+</div>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es">
+  <%- include("../../partials/head") %>
+  <body>
+    <%- include("../../partials/header") %>
+
+    <main class="container">
+      <h1>Mis productos</h1>
+
+      <div class="product-grid">
+        <% products.forEach(product => { %>
+          <%- include("../../partials/productCard", { product, session }) %>
+        <% }) %>
+      </div>
+    </main>
+
+    <%- include("../../partials/footer") %>
+  </body>
+</html>

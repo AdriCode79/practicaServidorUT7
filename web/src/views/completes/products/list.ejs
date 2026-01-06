@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+  <%- include("../../partials/head") %>
+
+  <body>
+    <%- include("../../partials/header") %>
+
+    <main class="container">
+      <%- include("../../partials/flash") %>
+
+      <h1>Productos</h1>
+
+      <!-- 🔍 BUSCADOR -->
+<form action="/products" method="GET" class="filters-bar">
+  <input
+    type="text"
+    name="q"
+    placeholder="Buscar productos..."
+    value="<%= typeof query !== 'undefined' ? query : '' %>"
+  />
+
+  <select name="category">
+    <option value="">Todas las categorías</option>
+    <option value="ordenadores" <%= category === "ordenadores" ? "selected" : "" %>>Ordenadores</option>
+    <option value="smartphones" <%= category === "smartphones" ? "selected" : "" %>>Smartphones</option>
+    <option value="tablets" <%= category === "tablets" ? "selected" : "" %>>Tablets</option>
+    <option value="accesorios" <%= category === "accesorios" ? "selected" : "" %>>Accesorios</option>
+    <option value="audio" <%= category === "audio" ? "selected" : "" %>>Audio</option>
+    <option value="gaming" <%= category === "gaming" ? "selected" : "" %>>Gaming</option>
+    <option value="hogar" <%= category === "hogar" ? "selected" : "" %>>Tecnología para el hogar</option>
+    <option value="otros" <%= category === "otros" ? "selected" : "" %>>Otros</option>
+  </select>
+
+  <input
+    type="number"
+    name="minPrice"
+    placeholder="Precio mínimo"
+    value="<%= minPrice || '' %>"
+    min="0"
+    step="0.01"
+  />
+
+  <input
+    type="number"
+    name="maxPrice"
+    placeholder="Precio máximo"
+    value="<%= maxPrice || '' %>"
+    min="0"
+    step="0.01"
+  />
+  <select name="sort">
+  <option value="">Ordenar por...</option>
+  <option value="price_asc" <%= sort === "price_asc" ? "selected" : "" %>>Precio: menor a mayor</option>
+  <option value="price_desc" <%= sort === "price_desc" ? "selected" : "" %>>Precio: mayor a menor</option>
+  <option value="newest" <%= sort === "newest" ? "selected" : "" %>>Más recientes</option>
+</select>
+
+  <div class="filter-buttons">
+  <button type="submit">Buscar</button>
+  <a href="/products" class="btn-clear">Limpiar</a>
+</div>
+
+</form>
+
+
+
+
+      <!-- GRID DE PRODUCTOS -->
+      <section class="product-grid">
+        <% products.forEach(product => { %>
+        <article class="product-card">
+          <img
+            class="thumb"
+            src="<%= product.imageUrl %>"
+            alt="<%= product.title %>"
+          />
+
+          <h2><%= product.title %></h2>
+          <p><%= product.price %> €</p>
+
+          <a href="/products/<%= product.id %>" class="btn">Ver detalles</a>
+        </article>
+        <% }) %>
+      </section>
+    </main>
+
+    <%- include("../../partials/footer") %>
+  </body>
+</html>

@@ -1,0 +1,31 @@
+<header class="site-header">
+  <div class="logo">
+    <a href="/">BackToTech</a>
+  </div>
+
+  <nav class="main-nav">
+    <div class="nav-links">
+      <a href="/products">Productos</a>
+      <% if (session.user) { %>
+      <a href="/products/new">Subir producto</a>
+      <a href="/products/mine">Mis productos</a>
+      <% } %>
+    </div>
+
+    <% if (session.user) { %>
+    <div class="user-info">
+      <span>Hola, <%= session.user.username %></span>
+      <form action="/users/logout" method="POST" class="logout-form">
+        <button type="submit">Cerrar sesión</button>
+      </form>
+    </div>
+    <% } else { %>
+    <div class="auth-links">
+      <a href="/users/login">Iniciar sesión</a>
+      <a href="/users/register">Registrarse</a>
+    </div>
+    <% } %> <% if (session.user) { %>
+    <a href="/users/profile">Mi perfil</a>
+    <% } %>
+  </nav>
+</header>

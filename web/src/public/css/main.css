@@ -1,0 +1,514 @@
+/* ===========================
+   RESET BÁSICO
+=========================== */
+body {
+  background: red;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background-color: #f4f5f7;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* ===========================
+   HEADER
+=========================== */
+.site-header {
+  background-color: #ffffff;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.site-header .logo a {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #27ae60;
+  text-decoration: none;
+}
+
+.site-header nav a {
+  margin-left: 1rem;
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+.site-header nav a:hover {
+  color: #27ae60;
+}
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+}
+.nav-links a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+.nav-links a:hover {
+  color: #27ae60;
+}
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-left: 2rem;
+}
+.user-info span {
+  font-weight: 500;
+  color: #555;
+}
+
+/* ===========================
+   FOOTER
+=========================== */
+.site-footer {
+  background-color: #ffffff;
+  border-top: 1px solid #e5e5e5;
+  padding: 1rem 2rem;
+  text-align: center;
+  margin-top: 3rem;
+}
+
+/* ===========================
+   CONTENEDOR
+=========================== */
+.container {
+  max-width: 1100px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+/* ===========================
+   BOTONES
+=========================== */
+.btn {
+  display: inline-block;
+  padding: 0.7rem 1.4rem;
+  border-radius: 6px;
+  background-color: #27ae60;
+  color: #fff;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s ease;
+}
+
+.btn:hover {
+  background-color: #1e8f4e;
+}
+
+.btn-secondary {
+  background-color: #2980b9;
+}
+
+.btn-secondary:hover {
+  background-color: #1f6691;
+}
+
+.btn-danger {
+  background-color: #c0392b;
+}
+
+.btn-danger:hover {
+  background-color: #992d22;
+}
+
+/* ===========================
+   FLASH MESSAGES
+=========================== */
+.flash {
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.flash-error {
+  background-color: #ffdddd;
+  color: #a33;
+}
+
+.flash-success {
+  background-color: #ddffdd;
+  color: #3a3;
+}
+
+/* ===========================
+   GRID DE PRODUCTOS
+=========================== */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.product-card {
+  background: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #e5e5e5;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  text-align: center;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+}
+
+.product-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.product-card img.thumb {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin: 0 auto;
+  display: block;
+}
+
+.product-card h2 {
+  font-size: 1.1rem;
+  margin: 0.6rem 0;
+}
+
+.product-card .price {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #27ae60;
+}
+
+/* ===========================
+   DETALLE DE PRODUCTO
+=========================== */
+.product-detail {
+  display: flex;
+  gap: 2rem;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.product-detail img {
+  width: 350px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.product-info h1 {
+  margin-bottom: 1rem;
+}
+
+.product-info p {
+  margin-bottom: 0.5rem;
+}
+
+.actions {
+  margin-top: 1.5rem;
+}
+
+.actions .btn {
+  margin-right: 0.5rem;
+}
+.search-bar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.search-bar input {
+  flex: 1;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.search-bar button {
+  padding: 8px 16px;
+  border: none;
+  background: #007bff;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* ===========================
+   FORMULARIOS
+=========================== */
+form {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.form-group {
+  margin-bottom: 1.2rem;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 0.7rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+textarea {
+  min-height: 120px;
+}
+.inline-form {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+
+.inline-form button {
+  padding: 0.7rem 1.4rem;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+/* ===========================
+   HOME
+=========================== */
+.home {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.home h1 {
+  font-size: 2.4rem;
+  margin-bottom: 1rem;
+}
+
+.home p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+.logout-form {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+
+.logout-form button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.logout-form button:hover {
+  background-color: #0056b3;
+}
+/* === Filtros y buscador === */
+.filters-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.filters-bar input,
+.filters-bar select {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  flex: 1;
+  min-width: 150px;
+}
+
+.filters-bar button {
+  padding: 10px 20px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.filters-bar .btn-clear {
+  padding: 10px 20px;
+  background: #ccc;
+  color: black;
+  border-radius: 6px;
+  text-decoration: none;
+}
+.filters-bar select {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  min-width: 180px;
+}
+.filter-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.filter-buttons button,
+.filter-buttons .btn-clear {
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.filter-buttons button {
+  background: #007bff;
+  color: white;
+  border: none;
+}
+
+.filter-buttons .btn-clear {
+  background: #ccc;
+  color: black;
+}
+/* --- Perfil --- */
+
+.profile-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.profile-card {
+  text-align: center;
+  background: #fff;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  margin-bottom: 40px;
+}
+
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+  border: 4px solid #eee;
+}
+
+.profile-card h2 {
+  margin: 10px 0 5px;
+  font-size: 24px;
+}
+
+.profile-card .email {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.btn-edit {
+  display: inline-block;
+  padding: 10px 20px;
+  background: #007bff;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.btn-edit:hover {
+  background: #005fcc;
+}
+
+/* --- Productos del usuario --- */
+
+.products-section h3 {
+  margin-bottom: 20px;
+  font-size: 22px;
+}
+
+.no-products {
+  color: #777;
+  font-style: italic;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+.product-card {
+  background: #fff;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+  text-align: center;
+}
+
+.product-card img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.product-card h4 {
+  margin: 5px 0;
+  font-size: 18px;
+}
+
+.product-card .price {
+  color: #007bff;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.btn-view {
+  display: inline-block;
+  padding: 8px 15px;
+  background: #333;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.btn-view:hover {
+  background: #000;
+}
+
