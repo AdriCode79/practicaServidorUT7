@@ -131,6 +131,16 @@ body {
 .btn-danger:hover {
   background-color: #992d22;
 }
+.fav-btn {
+  font-size: 1.5rem;
+  color: #f5c518;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+
 
 /* ===========================
    FLASH MESSAGES
@@ -511,4 +521,27 @@ textarea {
 .btn-view:hover {
   background: #000;
 }
+
+/* --- Paginacion --- */
+.pagination {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.pagination a {
+  display: inline-block;
+  margin: 0 5px;
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  text-decoration: none;
+  color: #333;
+  border-radius: 4px;
+}
+
+.pagination a.active {
+  background-color: #333;
+  color: #fff;
+  font-weight: bold;
+}
+
 

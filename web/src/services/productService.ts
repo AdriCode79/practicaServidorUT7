@@ -1,27 +1,28 @@
 import { Product } from "../models/Product";
+import { products as initialProducts } from "../data/products";
 
-// Base de datos temporal en memoria
-let products: Product[] = [];
-let nextId = 1;
+// Base de datos en memoria
+let products: Product[] = [...initialProducts];
+let nextId = Math.max(...products.map(p => p.id), 0) + 1;
 
 export const productService = {
   // Obtener todos los productos
-  async getAll(): Promise<Product[]> {
-    return products;
+  getAll(): Promise<Product[]> {
+    return Promise.resolve(products);
   },
 
   // Obtener producto por ID
-  async getById(id: number): Promise<Product | undefined> {
-    return products.find((p) => p.id === id);
+  getById(id: number): Promise<Product | undefined> {
+    return Promise.resolve(products.find(p => p.id === id));
   },
 
-  // Obtener productos por usuario (para "Mis productos")
-  async getByOwner(ownerId: number): Promise<Product[]> {
-    return products.filter((p) => p.ownerId === ownerId);
+  // Obtener productos por usuario
+  getByOwner(ownerId: number): Promise<Product[]> {
+    return Promise.resolve(products.filter(p => p.ownerId === ownerId));
   },
 
   // Crear producto
-  async create(data: Omit<Product, "id" | "createdAt">): Promise<Product> {
+  create(data: Omit<Product, "id" | "createdAt">): Promise<Product> {
     const newProduct: Product = {
       id: nextId++,
       createdAt: new Date(),
@@ -29,29 +30,25 @@ export const productService = {
     };
 
     products.push(newProduct);
-    return newProduct;
+    return Promise.resolve(newProduct);
   },
 
   // Actualizar producto
-  async update(
+  update(
     id: number,
     data: Partial<Omit<Product, "id" | "ownerId" | "createdAt">>
   ): Promise<Product | null> {
-    const index = products.findIndex((p) => p.id === id);
-    if (index === -1) return null;
+    const index = products.findIndex(p => p.id === id);
+    if (index === -1) return Promise.resolve(null);
 
-    products[index] = {
-      ...products[index],
-      ...data,
-    };
-
-    return products[index];
+    products[index] = { ...products[index], ...data };
+    return Promise.resolve(products[index]);
   },
 
   // Eliminar producto
-  async remove(id: number): Promise<boolean> {
+  remove(id: number): Promise<boolean> {
     const initialLength = products.length;
-    products = products.filter((p) => p.id !== id);
-    return products.length < initialLength;
+    products = products.filter(p => p.id !== id);
+    return Promise.resolve(products.length < initialLength);
   },
 };

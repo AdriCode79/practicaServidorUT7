@@ -8,6 +8,8 @@ dotenv.config();
 import indexRouter from "./routes/index";
 import productRouter from "./routes/productRoutes";
 import userRouter from "./routes/userRoutes";
+import favoriteRoutes from "./routes/favoriteRoutes";
+
 // (luego añadiremos userRoutes, statsRoutes, etc.)
 
 import notFoundHandler from "./middleware/notFoundHandler";
@@ -50,6 +52,7 @@ app.use((req, res, next) => {
 app.use("/", indexRouter);
 app.use("/products", productRouter);
 app.use("/users", userRouter);
+ 
 
 
 

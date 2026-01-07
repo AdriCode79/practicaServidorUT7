@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+  <%- include("../../partials/head") %>
+  <body>
+    <%- include("../../partials/header") %>
+
+    <main class="container">
+      <%- include("../../partials/flash") %>
+
+      <h1>Mis favoritos</h1>
+
+      <% if (products.length === 0) { %>
+        <p>No has marcado ningún producto como favorito.</p>
+      <% } else { %>
+        <section class="product-grid">
+          <% products.forEach(product => { %>
+            <%- include("../../partials/productCard", { product, session }) %>
+          <% }) %>
+        </section>
+      <% } %>
+    </main>
+
+    <%- include("../../partials/footer") %>
+  </body>
+</html>

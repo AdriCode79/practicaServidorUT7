@@ -10,6 +10,15 @@ declare module "express-session" {
       username: string;
       email: string;
       avatar?: string;
+      favorites: number[]; // 👈 Añadido aquí
+    };
+    flash?: {
+      type: "success" | "error";
+      message: string;
+    };
+    formData?: {
+      username?: string;
+      email?: string;
     };
   }
 }

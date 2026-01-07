@@ -32,7 +32,10 @@ router.get("/:id", showProductDetail);
 
 // Editar producto (solo dueño)
 router.get("/:id/edit", requireAuth, showEditForm);
-router.post("/:id/edit", requireAuth, updateProduct);
+
+// ✅ Corrige esta línea
+router.post("/:id/edit", requireAuth, upload.single("image"), updateProduct);
+
 
 // Eliminar producto (solo dueño)
 router.post("/:id/delete", requireAuth, deleteProduct);

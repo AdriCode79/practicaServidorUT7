@@ -3,5 +3,6 @@ export interface User {
   username: string;
   email: string;
   passwordHash: string;
-  avatarUrl?: string
+  avatarUrl?: string;
+  favorites: number[]; // IDs de productos favoritos
 }

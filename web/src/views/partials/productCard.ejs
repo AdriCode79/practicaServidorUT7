@@ -6,11 +6,29 @@
 
   <a href="/products/<%= product.id %>" class="btn btn-secondary">Ver</a>
 
-  <% if (session.user && session.user.id === product.ownerId) { %>
-    <a href="/products/<%= product.id %>/edit" class="btn btn-secondary">Editar</a>
+  <% if (session.user?.id === product.ownerId) { %>
+  <a href="/products/<%= product.id %>/edit" class="btn btn-secondary"
+    >Editar</a
+  >
 
-    <form action="/products/<%= product.id %>/delete" method="POST" class="inline-form">
-      <button type="submit" class="btn btn-danger">Eliminar</button>
-    </form>
+  <form
+    action="/products/<%= product.id %>/delete"
+    method="POST"
+    class="inline-form"
+  >
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+  </form>
+  <% } %> <% if (session.user) { %> <% const isFav =
+  session.user.favorites?.includes(product.id); %>
+  <form
+    action="/users/favorites/<%= product.id %>"
+    method="POST"
+    class="inline-form"
+  >
+    <button type="submit" class="btn btn-link fav-btn" title="Favorito">
+      <%= isFav ? "⭐" : "☆" %>
+    </button>
+  </form>
+
   <% } %>
 </div>

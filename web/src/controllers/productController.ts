@@ -5,31 +5,42 @@ import cloudinary from "../config/cloudinary";
 // ===============================
 // LISTAR PRODUCTOS
 // ===============================
-export const listProducts = async (req: Request, res: Response, next: NextFunction) => {
+export const listProducts = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const query = (req.query.q as string)?.toLowerCase() || "";
     const category = (req.query.category as string) || "";
     const minPrice = Number(req.query.minPrice) || 0;
     const maxPrice = Number(req.query.maxPrice) || Infinity;
     const sort = (req.query.sort as string) || "";
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = 6;
+    const startIndex = (page - 1) * limit;
+    const endIndex = page * limit;
 
     let products = await productService.getAll();
 
     // 🔍 Búsqueda
     if (query) {
-      products = products.filter(p =>
-        p.title.toLowerCase().includes(query) ||
-        p.description.toLowerCase().includes(query)
+      products = products.filter(
+        (p) =>
+          p.title.toLowerCase().includes(query) ||
+          p.description.toLowerCase().includes(query)
       );
     }
 
     // 🏷️ Categoría
     if (category) {
-      products = products.filter(p => p.category === category);
+      products = products.filter((p) => p.category === category);
     }
 
     // 💶 Precio
-    products = products.filter(p => p.price >= minPrice && p.price <= maxPrice);
+    products = products.filter(
+      (p) => p.price >= minPrice && p.price <= maxPrice
+    );
 
     // 🔽 ORDENACIÓN
     if (sort === "price_asc") {
@@ -41,24 +52,28 @@ export const listProducts = async (req: Request, res: Response, next: NextFuncti
     }
 
     if (sort === "newest") {
-      products.sort((a, b) => b.id - a.id); // asumiendo que id más alto = más reciente
+      products.sort((a, b) => b.id - a.id);
     }
+
+    const totalPages = Math.ceil(products.length / limit);
+    const paginatedProducts = products.slice(startIndex, endIndex);
 
     res.render("completes/products/list", {
       title: "Productos tecnológicos",
-      products,
+      products: paginatedProducts,
       query,
       category,
       minPrice: req.query.minPrice,
       maxPrice: req.query.maxPrice,
       sort,
+      currentPage: page,
+      totalPages,
       session: req.session,
     });
   } catch (err) {
     next(err);
   }
 };
-
 
 // ===============================
 // DETALLE DE PRODUCTO
@@ -105,9 +120,6 @@ export const showCreateForm = (req: Request, res: Response) => {
 // ===============================
 // CREAR PRODUCTO
 // ===============================
-// ===============================
-// CREAR PRODUCTO
-// ===============================
 export const createProduct = async (
   req: Request,
   res: Response,
@@ -116,14 +128,44 @@ export const createProduct = async (
   try {
     const { title, description, price, category, condition } = req.body;
 
-    // Validaciones básicas
-    if (!title || !description || !price) {
+    const validCategories = [
+      "ordenadores", "smartphones", "tablets", "accesorios",
+      "audio", "gaming", "hogar", "otros"
+    ];
+
+    const validConditions = ["nuevo", "como_nuevo", "bueno", "aceptable"];
+
+    const errors: string[] = [];
+
+    // Validaciones
+    if (!title || title.trim().length < 3) {
+      errors.push("El título debe tener al menos 3 caracteres.");
+    }
+
+    if (!description || description.trim().length < 10) {
+      errors.push("La descripción debe tener al menos 10 caracteres.");
+    }
+
+    const numericPrice = Number(price);
+    if (isNaN(numericPrice) || numericPrice <= 0) {
+      errors.push("El precio debe ser un número positivo.");
+    }
+
+    if (!validCategories.includes(category)) {
+      errors.push("La categoría seleccionada no es válida.");
+    }
+
+    if (!validConditions.includes(condition)) {
+      errors.push("El estado del producto no es válido.");
+    }
+
+    if (errors.length > 0) {
       return res.status(400).render("completes/products/form", {
         title: "Subir producto",
         product: req.body,
         formAction: "/products",
         formMethod: "POST",
-        error: "Título, descripción y precio son obligatorios.",
+        error: errors.join(" "),
         session: req.session,
       });
     }
@@ -133,9 +175,9 @@ export const createProduct = async (
 
     // Crear producto
     await productService.create({
-      title,
-      description,
-      price: Number(price),
+      title: title.trim(),
+      description: description.trim(),
+      price: numericPrice,
       category,
       condition,
       imageUrl,
@@ -147,6 +189,7 @@ export const createProduct = async (
     next(error);
   }
 };
+
 
 // ===============================
 // FORMULARIO DE EDICIÓN

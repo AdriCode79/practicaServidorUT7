@@ -4,8 +4,8 @@ export interface Product {
   description: string;
   price: number;
   category: string;
-  condition: "nuevo" | "como_nuevo" | "bueno" | "aceptable";
+  condition: "nuevo" | "como nuevo" | "bueno" | "aceptable";
   imageUrl: string;
   createdAt: Date;
-  ownerId: number; // 👈 este es el único dueño real
+  ownerId: number; 
 }
